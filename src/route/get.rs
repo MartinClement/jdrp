@@ -24,6 +24,11 @@ pub fn create() -> io::Result<NamedFile> {
     NamedFile::open("static/chat/user_creation.html")
 }
 
+#[post("/login-vue")]
+pub fn login_vue() -> Json<&'static str> {
+    Json("{ 'ok': true }")
+}
+
 #[post("/login", data = "<user_input>")]
 pub fn submit_task(user_input: Form<UserInput>, cookies: Cookies) -> Redirect  {
     use crate::repository::mainlib::get_user_password;

@@ -57,6 +57,7 @@ fn rocket() -> rocket::Rocket {
         get::check_caracter_creation,
         get::testobjectgeneration,
         get::testobjectgenerationlol,
+        get::login_vue,
 
     ];
 
