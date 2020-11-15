@@ -36,6 +36,9 @@ mod route;
 
 use crate::route::{get, static_files};
 use rocket_contrib::serve::StaticFiles;
+use rocket::http::hyper::header::{AccessControlAllowOrigin};
+use rocket::fairing::AdHoc;
+
 
 mod chat;
 
@@ -63,6 +66,9 @@ fn rocket() -> rocket::Rocket {
 
     rocket::ignite()
     .mount("/", rocket_routes)
+    .attach(AdHoc::on_response("Add Header", |_, resp| {
+        resp.adjoin_header(AccessControlAllowOrigin::Any);
+    }))
     .mount("/images", StaticFiles::from("/home/guillaume/Projects/Jdrp/static/images"))
 }
 
